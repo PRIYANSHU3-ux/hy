@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Portfolio | Work</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <nav class="navbar">
+        <div class="logo">PORTFOLIO</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="work.html" class="active">Work</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <main class="work-container">
+        <h2 class="section-title">Featured Works</h2>
+        <div class="portfolio-grid" id="portfolio-grid">
+            <!-- Projects will be loaded dynamically -->
+        </div>
+
+        <script>
+            // Load projects from localStorage
+            function loadPortfolioProjects() {
+                const portfolioGrid = document.getElementById('portfolio-grid');
+                const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+
+                if (projects.length === 0) {
+                    // Default projects if none exist
+                    portfolioGrid.innerHTML = `
+                        <div class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="images/project1.jpg" alt="Luxury Brand Identity">
+                            </div>
+                            <h3>Luxury Brand Identity</h3>
+                            <p>Visual Design / High-end Branding</p>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="images/project2.jpg" alt="Digital Art Collection">
+                            </div>
+                            <h3>Abstract Digital Art</h3>
+                            <p>NFT Collection / Digital Art</p>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="images/project3.jpg" alt="Modern Web Design">
+                            </div>
+                            <h3>Premium Web Design</h3>
+                            <p>UI/UX / Development</p>
+                        </div>`;
+                } else {
+                    portfolioGrid.innerHTML = projects.map(project => `
+                        <div class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="${project.image}" alt="${project.title}">
+                            </div>
+                            <h3>${project.title}</h3>
+                            <p>${project.category}</p>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Load projects when page loads
+            loadPortfolioProjects();
+            // Load projects when page loads
+            loadPortfolioProjects();
+        </script>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
